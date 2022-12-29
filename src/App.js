@@ -15,7 +15,7 @@ function App() {
     };
 
     setList((prev) => [...prev, newDot]);
-    console.log(newDot)
+    setUndid([]);
   }
 
   const handleUndo = (event) => {
@@ -36,6 +36,10 @@ function App() {
 
   const handleRedo = (event) => {
     event.stopPropagation();
+
+    if (undid.length === 0) {
+      return;
+    }
     
     const recoveredDot = undid[undid.length - 1];
 
@@ -52,10 +56,9 @@ function App() {
     <div id='page' onClick={handleClick}>
       <button onClick={handleUndo}>Undo</button>
       <button onClick={handleRedo}>Redo</button>
-      {list.map((item) => (
-        <span className='dot' style={{left: item.clientX, top: item.clientY}}></span>
+      {list.map((item, index) => (
+        <span key={index}  className='dot' style={{left: item.clientX, top: item.clientY}}></span>
       ))}
-      <span className='dot'></span>
     </div>
 
   );
