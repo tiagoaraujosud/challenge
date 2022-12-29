@@ -11,14 +11,18 @@ function App() {
     const newDot = {
       clientX: event.clientX,
       clientY: event.clientY
-    }
-    //setList();
+    };
+
+    setList((prev) => [...prev, newDot]);
     console.log(newDot)
   }
 
   return (
     
     <div id='page' onClick={handleClick}>
+      {list.map((item) => (
+        <span className='dot' style={{left: item.clientX, top: item.clientY}}></span>
+      ))}
       <span className='dot'></span>
     </div>
 
